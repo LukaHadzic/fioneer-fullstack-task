@@ -1,15 +1,53 @@
 package com.fioneer.backend.dto;
 
-import com.fioneer.backend.entity.Coverage;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+import java.math.BigDecimal;
 
 public class CoverageCreateDto {
 
-    private Coverage coverage;
+    @NotBlank
+    private String name;
+    @NotNull
+    private BigDecimal sumInsured;
+    @NotBlank
+    private String businessName;
+    @NotBlank
     private String accumulationName;
 
-    public CoverageCreateDto(Coverage coverage, String accumulationName) {
-        this.coverage = coverage;
+    public CoverageCreateDto() {
+    }
+
+    public CoverageCreateDto(String name, BigDecimal sumInsured, String businessName, String accumulationName) {
+        this.name = name;
+        this.sumInsured = sumInsured;
+        this.businessName = businessName;
         this.accumulationName = accumulationName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BigDecimal getSumInsured() {
+        return sumInsured;
+    }
+
+    public void setSumInsured(BigDecimal sumInsured) {
+        this.sumInsured = sumInsured;
+    }
+
+    public String getBusinessName() {
+        return businessName;
+    }
+
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
     }
 
     public String getAccumulationName() {
@@ -18,13 +56,5 @@ public class CoverageCreateDto {
 
     public void setAccumulationName(String accumulationName) {
         this.accumulationName = accumulationName;
-    }
-
-    public Coverage getCoverage() {
-        return coverage;
-    }
-
-    public void setCoverage(Coverage coverage) {
-        this.coverage = coverage;
     }
 }

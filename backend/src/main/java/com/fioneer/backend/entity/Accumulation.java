@@ -32,20 +32,15 @@ public class Accumulation {
     public Accumulation() {
     }
 
-    public Accumulation(Long id, String name, ClassOfBusiness classOfBusiness, Status status) {
-        this.id = id;
+    public Accumulation(String name, ClassOfBusiness classOfBusiness, Status status, String description) {
         this.name = name;
         this.classOfBusiness = classOfBusiness;
         this.status = status;
-        this.description = "";
-    }
-
-    public Accumulation(Long id, String name, ClassOfBusiness classOfBusiness, Status status, String description) {
-        this.id = id;
-        this.name = name;
-        this.classOfBusiness = classOfBusiness;
-        this.status = status;
-        this.description = description;
+        if (description.isEmpty() ||  description == null) {
+            this.description = "";
+        } else {
+            this.description = description;
+        }
     }
 
     public Long getId() {
@@ -86,5 +81,9 @@ public class Accumulation {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void addCoverage(Coverage coverage) {
+        this.coverages.add(coverage);
     }
 }

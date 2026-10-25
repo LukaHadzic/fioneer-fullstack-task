@@ -15,7 +15,7 @@ public class Coverage {
     @Column(unique = true, nullable=false)
     private String name;
 
-    @Column
+    @Column(nullable=false)
     private BigDecimal sumInsured;
 
     @ManyToOne(optional = false)
@@ -27,6 +27,13 @@ public class Coverage {
     private Accumulation accumulation;
 
     public Coverage() {
+    }
+
+    public Coverage(String name, BigDecimal sumInsured, ClassOfBusiness classOfBusiness, Accumulation accumulation) {
+        this.name = name;
+        this.sumInsured = sumInsured;
+        this.classOfBusiness = classOfBusiness;
+        this.accumulation = accumulation;
     }
 
     public Coverage(Long id, String name, BigDecimal sumInsured, ClassOfBusiness classOfBusiness, Accumulation accumulation) {

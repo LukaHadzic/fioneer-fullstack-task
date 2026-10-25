@@ -16,6 +16,10 @@ public class Status {
     public Status() {
     }
 
+    public Status(String status) {
+        this.status = status;
+    }
+
     public Status(Long id, String status) {
         this.id = id;
         this.status = status;

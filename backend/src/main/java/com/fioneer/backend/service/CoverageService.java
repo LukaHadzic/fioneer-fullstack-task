@@ -1,9 +1,10 @@
 package com.fioneer.backend.service;
 
 import com.fioneer.backend.dto.CoverageCreateDto;
+import com.fioneer.backend.dto.CoverageDto;
 
 public interface CoverageService {
 
-    public String createCoverage(CoverageCreateDto coverageCreateDto);
+    public CoverageDto createCoverage(CoverageCreateDto coverageCreateDto);
 
 }

@@ -16,6 +16,10 @@ public class ClassOfBusiness {
     public ClassOfBusiness() {
     }
 
+    public ClassOfBusiness(String name) {
+        this.name = name;
+    }
+
     public ClassOfBusiness(Long id, String name) {
         this.id = id;
         this.name = name;

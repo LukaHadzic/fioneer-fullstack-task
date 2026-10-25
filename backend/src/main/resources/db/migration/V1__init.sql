@@ -21,7 +21,7 @@ CREATE TABLE accumulation (
 CREATE TABLE coverage (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(36) NOT NULL UNIQUE,
-    sumInsured NUMERIC NOT NULL,
+    sum_insured NUMERIC NOT NULL,
     class_of_business_id INTEGER NOT NULL,
     accumulation_id INTEGER NOT NULL,
     FOREIGN KEY (class_of_business_id) REFERENCES class_of_business(id),
