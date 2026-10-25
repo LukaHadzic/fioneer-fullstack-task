@@ -1,6 +1,9 @@
 package com.fioneer.backend.controller;
 
+import com.fioneer.backend.entity.Status;
 import com.fioneer.backend.service.StatusService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,22 +17,22 @@ public class StatusController {
     }
 
     @GetMapping("/{status}")
-    public String getStatus(@PathVariable String status) {
-        return statusService.getStatus(status);
+    public ResponseEntity<Status> getStatus(@PathVariable String status) {
+        return new ResponseEntity<>(statusService.getStatus(status), HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public String createStatus(@RequestBody String status) {
-        return statusService.createStatus(status);
+    public ResponseEntity<Status> createStatus(@RequestBody String status) {
+        return new ResponseEntity<>(statusService.createStatus(status), HttpStatus.CREATED);
     }
 
     @PatchMapping("/update/{oldStatus}")
-    public String updateStatus(@PathVariable String oldStatus, @RequestBody String newStatus) {
-        return statusService.updateStatus(oldStatus, newStatus);
+    public ResponseEntity<Status> updateStatus(@PathVariable String oldStatus, @RequestBody String newStatus) {
+        return new ResponseEntity<>(statusService.updateStatus(oldStatus, newStatus), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")
-    public String deleteStatus(@RequestParam String status) {
-        return statusService.deleteStatus(status);
+    public ResponseEntity<String> deleteStatus(@RequestParam String status) {
+        return new ResponseEntity<>(statusService.deleteStatus(status), HttpStatus.OK);
     }
 }

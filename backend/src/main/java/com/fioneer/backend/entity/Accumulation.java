@@ -86,4 +86,13 @@ public class Accumulation {
     public void addCoverage(Coverage coverage) {
         this.coverages.add(coverage);
     }
+
+    public void removeCoverage(Coverage coverage) {
+        this.coverages.remove(coverage);
+    }
+
+    public List<Coverage> getCoverages() {
+        return coverages;
+    }
+
 }

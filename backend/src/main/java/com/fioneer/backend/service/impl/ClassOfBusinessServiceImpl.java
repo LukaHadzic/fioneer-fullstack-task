@@ -1,6 +1,8 @@
 package com.fioneer.backend.service.impl;
 
 import com.fioneer.backend.entity.ClassOfBusiness;
+import com.fioneer.backend.exception.exceptionclasses.ClassOfBusinessAlreadyExistsException;
+import com.fioneer.backend.exception.exceptionclasses.ClassOfBusinessNotFoundException;
 import com.fioneer.backend.repository.ClassOfBusinessRepository;
 import com.fioneer.backend.service.ClassOfBusinessService;
 import org.springframework.stereotype.Service;
@@ -18,39 +20,39 @@ public class ClassOfBusinessServiceImpl implements ClassOfBusinessService {
     }
 
     @Override
-    public String getClassOfBusiness(String name) {
+    public ClassOfBusiness getClassOfBusiness(String name) {
 
         Optional<ClassOfBusiness> dbClassOfBusiness = classOfBusinessRepository.findByName(name);
 
-        if(dbClassOfBusiness.isEmpty()) return "No such class of business";
+        if(dbClassOfBusiness.isEmpty()) throw new ClassOfBusinessNotFoundException("No such class of business");
 
-        return dbClassOfBusiness.get().getName();
+        return dbClassOfBusiness.get();
     }
 
     @Override
-    public String createClassOfBusiness(String name) {
+    public ClassOfBusiness createClassOfBusiness(String name) {
         Optional<ClassOfBusiness> dbClassOfBusiness = classOfBusinessRepository.findByName(name);
 
-        if(dbClassOfBusiness.isPresent()) return "Class of business already exists";
+        if(dbClassOfBusiness.isPresent()) throw new ClassOfBusinessAlreadyExistsException("Class of business already exists");
 
         ClassOfBusiness savedClassOfBusiness = classOfBusinessRepository.saveAndFlush(new ClassOfBusiness(name));
 
-        return savedClassOfBusiness.getName();
+        return savedClassOfBusiness;
 
     }
 
     @Override
-    public String updateClassOfBusiness(String oldName, String newName) {
+    public ClassOfBusiness updateClassOfBusiness(String oldName, String newName) {
 
         Optional<ClassOfBusiness> dbClassOfBusiness = classOfBusinessRepository.findByName(oldName);
 
-        if(dbClassOfBusiness.isEmpty()) return "No such class of business";
+        if(dbClassOfBusiness.isEmpty()) throw new ClassOfBusinessNotFoundException("No such class of business");
 
         ClassOfBusiness dbClassOfBusinessTemp = dbClassOfBusiness.get();
 
         dbClassOfBusinessTemp.setName(newName);
 
-        return classOfBusinessRepository.saveAndFlush(dbClassOfBusinessTemp).getName();
+        return classOfBusinessRepository.saveAndFlush(dbClassOfBusinessTemp);
 
     }
 

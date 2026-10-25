@@ -10,4 +10,6 @@ public interface CoverageRepository extends JpaRepository<Coverage, Long> {
 
     Optional<Coverage> findByName (String name);
 
+    Integer deleteByName(String name);
+
 }

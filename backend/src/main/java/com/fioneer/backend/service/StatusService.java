@@ -1,12 +1,14 @@
 package com.fioneer.backend.service;
 
+import com.fioneer.backend.entity.Status;
+
 public interface StatusService {
 
-    public String getStatus(String status);
+    public Status getStatus(String status);
 
-    public String createStatus(String status);
+    public Status createStatus(String status);
 
-    public String updateStatus(String oldStatus, String newStatus);
+    public Status updateStatus(String oldStatus, String newStatus);
 
     public String deleteStatus(String status);
 }

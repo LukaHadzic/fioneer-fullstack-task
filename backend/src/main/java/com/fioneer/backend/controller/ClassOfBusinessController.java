@@ -3,6 +3,8 @@ package com.fioneer.backend.controller;
 import com.fioneer.backend.entity.ClassOfBusiness;
 import com.fioneer.backend.repository.ClassOfBusinessRepository;
 import com.fioneer.backend.service.ClassOfBusinessService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,23 +18,23 @@ public class ClassOfBusinessController {
     }
 
     @GetMapping("/{name}")
-    public String getClassOfBusiness(@PathVariable String name) {
-        return classOfBusinessService.getClassOfBusiness(name);
+    public ResponseEntity<ClassOfBusiness> getClassOfBusiness(@PathVariable String name) {
+        return new ResponseEntity<>(classOfBusinessService.getClassOfBusiness(name), HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public String createClassOfBusiness(@RequestBody String name) {
-        return classOfBusinessService.createClassOfBusiness(name);
+    public ResponseEntity<ClassOfBusiness> createClassOfBusiness(@RequestBody String name) {
+        return new ResponseEntity<>(classOfBusinessService.createClassOfBusiness(name), HttpStatus.OK);
     }
 
     @PatchMapping("/update/{oldName}")
-    public String updateClassOfBusiness(@PathVariable String oldName, @RequestBody String newName) {
-        return classOfBusinessService.updateClassOfBusiness(oldName, newName);
+    public ResponseEntity<ClassOfBusiness> updateClassOfBusiness(@PathVariable String oldName, @RequestBody String newName) {
+        return new ResponseEntity<>(classOfBusinessService.updateClassOfBusiness(oldName, newName), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")
-    public String deleteClassOfBusiness(@RequestParam String name) {
-        return classOfBusinessService.deleteClassOfBusiness(name);
+    public ResponseEntity<String> deleteClassOfBusiness(@RequestParam String name) {
+        return new ResponseEntity<>(classOfBusinessService.deleteClassOfBusiness(name), HttpStatus.OK);
     }
 
 }

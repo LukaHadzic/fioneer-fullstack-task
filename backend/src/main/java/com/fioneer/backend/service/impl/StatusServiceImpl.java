@@ -1,6 +1,8 @@
 package com.fioneer.backend.service.impl;
 
 import com.fioneer.backend.entity.Status;
+import com.fioneer.backend.exception.exceptionclasses.StatusAlreadyExists;
+import com.fioneer.backend.exception.exceptionclasses.StatusNotFoundException;
 import com.fioneer.backend.repository.StatusRepository;
 import com.fioneer.backend.service.StatusService;
 import org.springframework.stereotype.Service;
@@ -18,39 +20,39 @@ public class StatusServiceImpl implements StatusService {
     }
 
     @Override
-    public String getStatus(String status) {
+    public Status getStatus(String status) {
 
         Optional<Status> dbStatus = statusRepository.findByStatus(status);
 
-        if(dbStatus.isEmpty()) return "No such status";
+        if(dbStatus.isEmpty()) throw new StatusNotFoundException();
 
-        return dbStatus.get().getStatus();
+        return dbStatus.get();
     }
 
     @Override
-    public String createStatus(String status) {
+    public Status createStatus(String status) {
         Optional<Status> dbStatus = statusRepository.findByStatus(status);
 
-        if(dbStatus.isPresent()) return "status already exists";
+        if(dbStatus.isPresent()) throw new StatusAlreadyExists();
 
         Status savedStatus = statusRepository.saveAndFlush(new Status(status));
 
-        return savedStatus.getStatus();
+        return savedStatus;
 
     }
 
     @Override
-    public String updateStatus(String oldStatus, String newStatus) {
+    public Status updateStatus(String oldStatus, String newStatus) {
 
         Optional<Status> dbStatus = statusRepository.findByStatus(oldStatus);
 
-        if(dbStatus.isEmpty()) return "No such status";
+        if(dbStatus.isEmpty()) throw new StatusNotFoundException();
 
         Status dbStatusTemp = dbStatus.get();
 
         dbStatusTemp.setStatus(newStatus);
 
-        return statusRepository.saveAndFlush(dbStatusTemp).getStatus();
+        return statusRepository.saveAndFlush(dbStatusTemp);
 
     }
 
