@@ -16,7 +16,7 @@ public class CoverageMapper {
     public CoverageMapper() {
     }
 
-    public CoverageDto toCoverageDto(Coverage coverage){
+    public static CoverageDto toCoverageDto(Coverage coverage){
         return new CoverageDto(coverage.getName(), coverage.getSumInsured(),
                 coverage.getClassOfBusiness().getName(), coverage.getAccumulation().getName());
     }

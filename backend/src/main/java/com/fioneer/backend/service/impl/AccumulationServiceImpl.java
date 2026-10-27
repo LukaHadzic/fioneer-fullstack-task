@@ -9,6 +9,7 @@ import com.fioneer.backend.entity.Status;
 import com.fioneer.backend.exception.exceptionclasses.AccumulationCreationException;
 import com.fioneer.backend.exception.exceptionclasses.AccumulationNotFoundException;
 import com.fioneer.backend.mapper.AccumulationMapper;
+import com.fioneer.backend.mapper.CoverageMapper;
 import com.fioneer.backend.repository.AccumulationRepository;
 import com.fioneer.backend.repository.ClassOfBusinessRepository;
 import com.fioneer.backend.repository.StatusRepository;
@@ -17,10 +18,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AccumulationServiceImpl implements AccumulationService {
 
+    private final CoverageMapper coverageMapper;
     private AccumulationRepository accumulationRepository;
     private AccumulationMapper accumulationMapper;
     private ClassOfBusinessRepository classOfBusinessRepository;
@@ -28,11 +31,12 @@ public class AccumulationServiceImpl implements AccumulationService {
 
     public AccumulationServiceImpl(AccumulationRepository accumulationRepository,
                                    ClassOfBusinessRepository classOfBusinessRepository,
-                                   AccumulationMapper accumulationMapper, StatusRepository statusRepository) {
+                                   AccumulationMapper accumulationMapper, StatusRepository statusRepository, CoverageMapper coverageMapper) {
         this.accumulationRepository = accumulationRepository;
         this.classOfBusinessRepository = classOfBusinessRepository;
         this.accumulationMapper = accumulationMapper;
         this.statusRepository = statusRepository;
+        this.coverageMapper = coverageMapper;
     }
 
     @Override
@@ -77,13 +81,22 @@ public class AccumulationServiceImpl implements AccumulationService {
 
         Accumulation newAccumulation = new Accumulation(dtoName, dbBusinessClass.get(), dbStatus.get(), dtoDescription);
 
-        return accumulationMapper.toAccumulationDto(accumulationRepository.saveAndFlush(newAccumulation));
+        try {
+            accumulationRepository.saveAndFlush(newAccumulation);
+            return accumulationMapper.toAccumulationDto(newAccumulation);
+        } catch (Exception e) {
+            return null;
+        }
+
+
 
     }
 
-//    @Override
-//    public List<Accumulation> getAll() {
-//
-//        return accumulationRepository.findAll();
-//    }
+    @Override
+    public List<AccumulationDto> getAll() {
+
+        return accumulationRepository.findAll().stream()
+                .map(AccumulationMapper::toAccumulationDto)
+                .collect(Collectors.toList());
+    }
 }

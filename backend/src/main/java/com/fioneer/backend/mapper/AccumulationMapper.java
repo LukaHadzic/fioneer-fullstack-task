@@ -10,7 +10,7 @@ public class AccumulationMapper {
     public AccumulationMapper() {
     }
 
-    public AccumulationDto toAccumulationDto(Accumulation accumulation){
+    public static AccumulationDto toAccumulationDto(Accumulation accumulation){
         return new AccumulationDto(accumulation.getName(), accumulation.getClassOfBusiness().getName(), accumulation.getStatus().getStatus(), accumulation.getDescription(), accumulation.getCoverages());
     }
 }

@@ -21,16 +21,16 @@ public class AccumulationController {
         this.accumulationService = accumulationService;
     }
 
-//    @GetMapping("")
-//    public ResponseEntity<List<Accumulation>> getAllAccumulations(){
-//
-//        return new ResponseEntity<>(accumulationService.getAll(), HttpStatus.OK);
-//    }
+    @GetMapping("")
+    public ResponseEntity<List<AccumulationDto>> getAllAccumulations(){
+
+        return new ResponseEntity<>(accumulationService.getAll(), HttpStatus.OK);
+    }
 
     @GetMapping("/{name}")
     public ResponseEntity<AccumulationDto> getAccumulationByName(@PathVariable String name) {
 
-        return new ResponseEntity<>( accumulationService.getAccumulationByName(name), HttpStatus.OK);
+        return new ResponseEntity<>(accumulationService.getAccumulationByName(name), HttpStatus.OK);
     }
 
     @GetMapping("/{accumulationName}/coverages")

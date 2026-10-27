@@ -15,5 +15,5 @@ public interface AccumulationService {
 
     public AccumulationDto createAccumulation(AccumulationCreateDto accumulationCreateDto);
 
-//    public List<Accumulation> getAll();
+    public List<AccumulationDto> getAll();
 }
