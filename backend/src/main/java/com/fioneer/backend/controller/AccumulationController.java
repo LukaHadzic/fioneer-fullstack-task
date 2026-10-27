@@ -45,5 +45,11 @@ public class AccumulationController {
         return new ResponseEntity<>(accumulationService.createAccumulation(accumulationCreateDto), HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> delete(@RequestBody String accumulationName) {
+
+        return new ResponseEntity<>(accumulationService.delete(accumulationName), HttpStatus.OK);
+    }
+
 
 }

@@ -36,7 +36,7 @@ public class Accumulation {
         this.name = name;
         this.classOfBusiness = classOfBusiness;
         this.status = status;
-        if (description.isEmpty() ||  description == null) {
+        if (description == null || description.isEmpty()) {
             this.description = "";
         } else {
             this.description = description;

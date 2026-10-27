@@ -10,4 +10,6 @@ public interface AccumulationRepository extends JpaRepository<Accumulation, Long
 
     @Query("SELECT a FROM Accumulation a LEFT JOIN FETCH a.coverages WHERE a.name = :name")
     Optional<Accumulation> findByName(String name);
+
+    Integer deleteByName(String name);
 }

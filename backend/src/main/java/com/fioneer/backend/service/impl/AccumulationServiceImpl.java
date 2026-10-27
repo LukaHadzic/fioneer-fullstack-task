@@ -15,6 +15,7 @@ import com.fioneer.backend.repository.ClassOfBusinessRepository;
 import com.fioneer.backend.repository.StatusRepository;
 import com.fioneer.backend.service.AccumulationService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -98,5 +99,19 @@ public class AccumulationServiceImpl implements AccumulationService {
         return accumulationRepository.findAll().stream()
                 .map(AccumulationMapper::toAccumulationDto)
                 .collect(Collectors.toList());
+    }
+
+
+    @Override
+    @Transactional
+    public String delete(String accumulationName) {
+
+        Optional<Accumulation> dbAccumulation = accumulationRepository.findByName(accumulationName);
+
+        if(dbAccumulation.isEmpty()) return "No such class of business";
+
+        if (accumulationRepository.deleteByName(accumulationName) == 1) return accumulationName;
+
+        return "Delete failed";
     }
 }

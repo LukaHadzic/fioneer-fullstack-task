@@ -16,4 +16,6 @@ public interface AccumulationService {
     public AccumulationDto createAccumulation(AccumulationCreateDto accumulationCreateDto);
 
     public List<AccumulationDto> getAll();
+
+    public String delete(String accumulationName);
 }
