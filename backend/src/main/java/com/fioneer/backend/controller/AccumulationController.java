@@ -2,6 +2,7 @@ package com.fioneer.backend.controller;
 
 import com.fioneer.backend.dto.AccumulationCreateDto;
 import com.fioneer.backend.dto.AccumulationDto;
+import com.fioneer.backend.dto.CoverageDto;
 import com.fioneer.backend.entity.Accumulation;
 import com.fioneer.backend.entity.Coverage;
 import com.fioneer.backend.service.AccumulationService;
@@ -34,7 +35,7 @@ public class AccumulationController {
     }
 
     @GetMapping("/{accumulationName}/coverages")
-    public ResponseEntity<List<Coverage>> getCoverages(@PathVariable("accumulationName") String accumulationName) {
+    public ResponseEntity<List<CoverageDto>> getCoverages(@PathVariable("accumulationName") String accumulationName) {
 
         return new ResponseEntity<>(accumulationService.getCoveragesByAccumulationName(accumulationName), HttpStatus.OK);
     }

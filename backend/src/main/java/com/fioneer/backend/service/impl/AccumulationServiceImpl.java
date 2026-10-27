@@ -2,6 +2,7 @@ package com.fioneer.backend.service.impl;
 
 import com.fioneer.backend.dto.AccumulationCreateDto;
 import com.fioneer.backend.dto.AccumulationDto;
+import com.fioneer.backend.dto.CoverageDto;
 import com.fioneer.backend.entity.Accumulation;
 import com.fioneer.backend.entity.ClassOfBusiness;
 import com.fioneer.backend.entity.Coverage;
@@ -51,12 +52,14 @@ public class AccumulationServiceImpl implements AccumulationService {
     }
 
     @Override
-    public List<Coverage> getCoveragesByAccumulationName(String accumulationName) {
+    public List<CoverageDto> getCoveragesByAccumulationName(String accumulationName) {
         Optional<Accumulation> dbAccumulation =  accumulationRepository.findByName(accumulationName);
 
         if (dbAccumulation.isEmpty()) return null;
 
-        return dbAccumulation.get().getCoverages();
+        return dbAccumulation.get().getCoverages().stream()
+                .map(CoverageMapper::toCoverageDto)
+                .collect(Collectors.toList());
     }
 
     @Override
