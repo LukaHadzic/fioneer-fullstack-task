@@ -28,10 +28,16 @@ public class AccumulationController {
         return new ResponseEntity<>(accumulationService.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<AccumulationDto> getAccumulationByName(@PathVariable String name) {
+//    @GetMapping("/{name}")
+//    public ResponseEntity<AccumulationDto> getAccumulationByName(@PathVariable String name) {
+//
+//        return new ResponseEntity<>(accumulationService.getAccumulationByName(name), HttpStatus.OK);
+//    }
 
-        return new ResponseEntity<>(accumulationService.getAccumulationByName(name), HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<AccumulationDto> getAccumulationById(@PathVariable Long id) {
+
+        return new ResponseEntity<>(accumulationService.getAccumulationById(id), HttpStatus.OK);
     }
 
     @GetMapping("/{accumulationName}/coverages")

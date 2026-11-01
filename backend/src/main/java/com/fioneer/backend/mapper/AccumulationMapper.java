@@ -11,6 +11,6 @@ public class AccumulationMapper {
     }
 
     public static AccumulationDto toAccumulationDto(Accumulation accumulation){
-        return new AccumulationDto(accumulation.getName(), accumulation.getClassOfBusiness().getName(), accumulation.getStatus().getStatus(), accumulation.getDescription(), accumulation.getCoverages());
+        return new AccumulationDto(accumulation.getId(), accumulation.getName(), accumulation.getClassOfBusiness().getName(), accumulation.getStatus().getStatus(), accumulation.getDescription(), accumulation.getCoverages());
     }
 }
