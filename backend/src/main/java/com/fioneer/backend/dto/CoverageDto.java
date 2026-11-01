@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class CoverageDto {
 
+    private Long id;
     private String name;
     private BigDecimal sumInsured;
     private String businessName;
@@ -14,6 +15,22 @@ public class CoverageDto {
         this.sumInsured = sumInsured;
         this.businessName = businessName;
         this.accumulationName = accumulationName;
+    }
+
+    public CoverageDto(Long id, String name, BigDecimal sumInsured, String businessName, String accumulationName) {
+        this.id = id;
+        this.name = name;
+        this.sumInsured = sumInsured;
+        this.businessName = businessName;
+        this.accumulationName = accumulationName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

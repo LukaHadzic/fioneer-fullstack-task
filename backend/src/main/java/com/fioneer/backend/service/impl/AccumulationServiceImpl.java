@@ -52,6 +52,15 @@ public class AccumulationServiceImpl implements AccumulationService {
     }
 
     @Override
+    public AccumulationDto getAccumulationById(Long id) {
+        Optional<Accumulation> accumulationDb = accumulationRepository.findById(id);
+
+        if (accumulationDb.isEmpty()) throw new AccumulationNotFoundException();
+
+        return accumulationMapper.toAccumulationDto(accumulationDb.get());
+    }
+
+    @Override
     public List<CoverageDto> getCoveragesByAccumulationName(String accumulationName) {
         Optional<Accumulation> dbAccumulation =  accumulationRepository.findByName(accumulationName);
 

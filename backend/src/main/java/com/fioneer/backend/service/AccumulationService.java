@@ -12,6 +12,8 @@ public interface AccumulationService {
 
     public AccumulationDto getAccumulationByName(String name);
 
+    public AccumulationDto getAccumulationById(Long id);
+
     public List<CoverageDto> getCoveragesByAccumulationName(String accumulationName);
 
     public AccumulationDto createAccumulation(AccumulationCreateDto accumulationCreateDto);
