@@ -15,7 +15,7 @@ function App() {
             <GlobalHeader/>
 
             <Routes>
-                <Route path="/accumulations/create" element={<AddAccumulationPage />} />
+                <Route path="/accumulations/new" element={<AddAccumulationPage />} />
                 <Route path="/accumulations" element={<AccumulationsTablePage />} />
                 <Route path="/accumulations/:id" element={<AccumulationsDetailsDynamic />} />
             </Routes>

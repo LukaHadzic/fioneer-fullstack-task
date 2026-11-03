@@ -7,9 +7,9 @@ export interface Coverage {
 }
 
 export interface Accumulation {
-    id: number
+    id?: number
     name: string;
-    numCoverages: number;
+    numCoverages?: number;
     business: string;
     status: string;
     description: string;
