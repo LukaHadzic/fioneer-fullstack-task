@@ -10,5 +10,7 @@ public interface CoverageService {
 
     public CoverageDto  updateCoverage(String name, CoverageUpdateDto coverageUpdateDto);
 
-    public String deleteCoverage (String coverageName);
+    public String deleteCoverage (Long coverageId);
+
+    public String batchDeleteCoverages (Long[] coverageIds);
 }

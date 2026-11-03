@@ -33,10 +33,16 @@ public class CoverageController {
         return new ResponseEntity<>(coverageService.updateCoverage(name, updateCoverageDto), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteCoverage(String coverageName) {
+//    @DeleteMapping("/delete")
+//    public ResponseEntity<String> deleteCoverage(String coverageName) {
+//
+//        return new ResponseEntity<>(coverageService.deleteCoverage(coverageName), HttpStatus.OK);
+//    }
 
-        return new ResponseEntity<>(coverageService.deleteCoverage(coverageName), HttpStatus.OK);
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> batchDeleteCoverage(@RequestBody Long[] coverageIds) {
+
+        return new ResponseEntity<>(coverageService.batchDeleteCoverages(coverageIds), HttpStatus.OK);
     }
 
 }

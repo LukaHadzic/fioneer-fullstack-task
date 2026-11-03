@@ -71,6 +71,11 @@ public class AccumulationServiceImpl implements AccumulationService {
                 .collect(Collectors.toList());
     }
 
+//    @Override
+//    public AccumulationSummaryDto getSummary() {
+//        return null;
+//    }
+
     @Override
     public AccumulationDto createAccumulation(AccumulationCreateDto accumulationCreateDto) {
 

@@ -40,6 +40,13 @@ public class AccumulationController {
         return new ResponseEntity<>(accumulationService.getAccumulationById(id), HttpStatus.OK);
     }
 
+//    @GetMapping("/summary")
+//    public ResponseEntity<AccumulationSummaryDto> getAccumulationSummary() {
+//
+//        return new ResponseEntity<>(accumulationService.getSummary(), HttpStatus.OK);
+//    }
+
+
     @GetMapping("/{accumulationName}/coverages")
     public ResponseEntity<List<CoverageDto>> getCoverages(@PathVariable("accumulationName") String accumulationName) {
 
