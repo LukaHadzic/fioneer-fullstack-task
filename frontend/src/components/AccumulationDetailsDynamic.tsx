@@ -13,6 +13,7 @@ import {
     Tag, Text,
     Title, Toolbar, ToolbarSpacer
 } from "@ui5/webcomponents-react";
+import {coverageService} from "../api/coverageService";
 
 export const AccumulationsDetailsDynamic: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -34,7 +35,7 @@ export const AccumulationsDetailsDynamic: React.FC = () => {
 
     const handleBatchDelete = async () => {
         try {
-            // await accumulationService.deleteCoverages(Number(id), selectedCoverageIds);
+            await coverageService.delete(selectedCoverageIds);
             setAccumulation(prev =>
             prev ? {... prev, coverages: prev.coverages?.filter(c => !selectedCoverageIds.includes(c.id))}
             : prev);
@@ -152,7 +153,7 @@ export const AccumulationsDetailsDynamic: React.FC = () => {
                             </DynamicPageHeader>
                         } style={{ width: '100%', height: '100%' }}>
 
-                    {accumulation.coverages && accumulation.numCoverages > 0 ? (
+                    {accumulation.coverages && accumulation.numCoverages && accumulation.numCoverages > 0 ? (
                         <div>
                             <Toolbar>
                                 <Title level={"H4"}>Coverages</Title>

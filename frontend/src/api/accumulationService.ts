@@ -19,13 +19,13 @@ export const accumulationService = {
     },
 
     create: async (data: Accumulation): Promise<Accumulation> => {
-        const response = await api.post('/accumulations', data);
+        const response = await api.post('/accumulations/create', data);
         return response.data;
     },
 
-    delete: async (name: string): Promise<string> => {
-        const response = await api.delete(`/accumulations/${name}`);
-        return response.data;
-    },
+    // delete: async (ids: number[]): Promise<string> => {
+    //     const response = await api.delete(`/accumulations`, { data: ids });
+    //     return response.data;
+    // },
 
 }

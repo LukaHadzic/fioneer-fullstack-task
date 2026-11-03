@@ -85,8 +85,16 @@ export const AccumulationForm: React.FC<AccumulationFormProps> = ({open, onClose
                         <Input
                             value={status}
                             onInput={(e: any)=> setStatus(e.target.value)}
-                            placeholder="PENDING"
+                            placeholder="DRAFT"
                         />
+                    </FormItem>
+                    <FormItem>
+                        <Label slot="label">Description Optional</Label>
+                        <Input
+                            value={description}
+                            onInput={(e: any) => setDescription(e.target.value)}
+                            placeholder="Description (Optional)"
+                            />
                     </FormItem>
                 </Form>
             </div>
