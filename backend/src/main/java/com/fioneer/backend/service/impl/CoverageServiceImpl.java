@@ -13,8 +13,11 @@ import com.fioneer.backend.repository.AccumulationRepository;
 import com.fioneer.backend.repository.ClassOfBusinessRepository;
 import com.fioneer.backend.repository.CoverageRepository;
 import com.fioneer.backend.service.CoverageService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -112,14 +115,15 @@ public class CoverageServiceImpl implements CoverageService {
     }
 
     @Override
-    public String deleteCoverage(String coverageName) {
-        if (coverageName == null || coverageName.isEmpty()) return "Delete failed, invalid coverage name.";
+    @Transactional
+    public String deleteCoverage(Long coverageId) {
+        if (coverageId < 0) throw new IllegalArgumentException("Not valid coverage id.");
 
-        Optional<Coverage> covDb = coverageRepository.findByName(coverageName);
-        if (covDb.isEmpty()) return "Delete failed, no coverage with provided name";
+        Optional<Coverage> covDb = coverageRepository.findById(coverageId);
+        if (covDb.isEmpty()) throw new EntityNotFoundException("Coverage not found");
 
-        Optional<Accumulation> accDb = accumulationRepository.findByName(covDb.get().getName());
-        if (accDb.isEmpty()) return "Delete failed, no accumulation found";
+        Optional<Accumulation> accDb = accumulationRepository.findByName(covDb.get().getAccumulation().getName());
+        if (accDb.isEmpty()) throw new IllegalStateException("Accumulation not found for coverage with id" + coverageId);
 
         try {
             coverageRepository.delete(covDb.get());
@@ -132,6 +136,19 @@ public class CoverageServiceImpl implements CoverageService {
             return "Delete failed due to database error.";
         }
 
+    }
+
+    @Override
+    @Transactional
+    public String batchDeleteCoverages(Long[] coverageIds) {
+
+        if (coverageIds == null ||  coverageIds.length < 1) throw new IllegalArgumentException("Not valid coverage id(s).");
+
+        for (Long id : coverageIds) {
+            deleteCoverage(id);
+        }
+
+        return "Deleted " + coverageIds.length + " coverage(s)";
     }
 
 
