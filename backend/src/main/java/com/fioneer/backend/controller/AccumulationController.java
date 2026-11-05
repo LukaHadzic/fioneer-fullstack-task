@@ -1,8 +1,6 @@
 package com.fioneer.backend.controller;
 
-import com.fioneer.backend.dto.AccumulationCreateDto;
-import com.fioneer.backend.dto.AccumulationDto;
-import com.fioneer.backend.dto.CoverageDto;
+import com.fioneer.backend.dto.*;
 import com.fioneer.backend.entity.Accumulation;
 import com.fioneer.backend.entity.Coverage;
 import com.fioneer.backend.service.AccumulationService;
@@ -11,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/accumulations")
@@ -40,11 +39,11 @@ public class AccumulationController {
         return new ResponseEntity<>(accumulationService.getAccumulationById(id), HttpStatus.OK);
     }
 
-//    @GetMapping("/summary")
-//    public ResponseEntity<AccumulationSummaryDto> getAccumulationSummary() {
-//
-//        return new ResponseEntity<>(accumulationService.getSummary(), HttpStatus.OK);
-//    }
+    @GetMapping("/summary")
+    public ResponseEntity<AccumulationsSummaryDto> getAccumulationSummary() {
+
+        return new ResponseEntity<>(accumulationService.getAverageSumInsuredPerStatus(), HttpStatus.OK);
+    }
 
 
     @GetMapping("/{accumulationName}/coverages")
@@ -60,9 +59,10 @@ public class AccumulationController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<String> delete(@RequestBody String accumulationName) {
+//    public ResponseEntity<String> delete(@RequestBody String accumulationName) {
+    public ResponseEntity<String> delete(@RequestBody Map<String, String> accumulationName) {
 
-        return new ResponseEntity<>(accumulationService.delete(accumulationName), HttpStatus.OK);
+        return new ResponseEntity<>(accumulationService.delete(accumulationName.get("name")), HttpStatus.OK);
     }
 
 

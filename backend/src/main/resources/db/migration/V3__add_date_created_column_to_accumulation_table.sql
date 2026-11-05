@@ -1,0 +1,2 @@
+ALTER TABLE accumulation
+    ADD COLUMN date_created TEXT NOT NULL DEFAULT "2026-10-20";
