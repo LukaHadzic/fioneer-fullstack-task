@@ -15,3 +15,8 @@ export interface Accumulation {
     description: string;
     coverages?: Coverage[];
 }
+
+export interface DashboardStats {
+    averageSumInsuredPerStatusDto: { status: string; averageInsured: number }[];
+    accumulationsCreatedPerDateDto: { dateOfCreation: string; numberCreated: number }[];
+}

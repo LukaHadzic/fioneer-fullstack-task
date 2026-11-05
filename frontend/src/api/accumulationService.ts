@@ -1,4 +1,4 @@
-import {Accumulation} from "../types";
+import {Accumulation, DashboardStats} from "../types";
 import {api} from "./client";
 
 export const accumulationService = {
@@ -13,6 +13,11 @@ export const accumulationService = {
         return response.data;
     },
 
+    async getDashboardStats(): Promise<DashboardStats> {
+        const response = await api.get(`/accumulations/summary`);
+        return response.data;
+    },
+
     getAll: async (): Promise<Accumulation[]> => {
         const response = await api.get('/accumulations');
         return response.data;
@@ -23,9 +28,9 @@ export const accumulationService = {
         return response.data;
     },
 
-    // delete: async (ids: number[]): Promise<string> => {
-    //     const response = await api.delete(`/accumulations`, { data: ids });
-    //     return response.data;
-    // },
+    delete: async (accumulationName: string): Promise<string> => {
+        const response = await api.delete(`/accumulations/delete`, { data: {name: accumulationName}} );
+        return response.data;
+    },
 
 }
