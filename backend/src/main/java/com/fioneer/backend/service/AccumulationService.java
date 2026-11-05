@@ -1,8 +1,6 @@
 package com.fioneer.backend.service;
 
-import com.fioneer.backend.dto.AccumulationCreateDto;
-import com.fioneer.backend.dto.AccumulationDto;
-import com.fioneer.backend.dto.CoverageDto;
+import com.fioneer.backend.dto.*;
 import com.fioneer.backend.entity.Accumulation;
 import com.fioneer.backend.entity.Coverage;
 
@@ -16,7 +14,7 @@ public interface AccumulationService {
 
     public List<CoverageDto> getCoveragesByAccumulationName(String accumulationName);
 
-//    public AccumulationSummaryDto getSummary();
+    public AccumulationsSummaryDto getAverageSumInsuredPerStatus();
 
     public AccumulationDto createAccumulation(AccumulationCreateDto accumulationCreateDto);
 

@@ -2,7 +2,9 @@ package com.fioneer.backend.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -26,6 +28,9 @@ public class Accumulation {
 
     private String description;
 
+    @Column(name="date_created", nullable = false)
+    private LocalDate dateCreated;
+
     @OneToMany(mappedBy = "accumulation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Coverage> coverages = new ArrayList<>();
 
@@ -41,6 +46,11 @@ public class Accumulation {
         } else {
             this.description = description;
         }
+    }
+
+    @PrePersist
+    protected void prePersist() {
+        this.dateCreated = LocalDate.now();
     }
 
     public Long getId() {
@@ -95,4 +105,11 @@ public class Accumulation {
         return coverages;
     }
 
+    public LocalDate getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 }

@@ -1,8 +1,6 @@
 package com.fioneer.backend.service.impl;
 
-import com.fioneer.backend.dto.AccumulationCreateDto;
-import com.fioneer.backend.dto.AccumulationDto;
-import com.fioneer.backend.dto.CoverageDto;
+import com.fioneer.backend.dto.*;
 import com.fioneer.backend.entity.Accumulation;
 import com.fioneer.backend.entity.ClassOfBusiness;
 import com.fioneer.backend.entity.Coverage;
@@ -71,10 +69,12 @@ public class AccumulationServiceImpl implements AccumulationService {
                 .collect(Collectors.toList());
     }
 
-//    @Override
-//    public AccumulationSummaryDto getSummary() {
-//        return null;
-//    }
+    @Override
+    public AccumulationsSummaryDto getAverageSumInsuredPerStatus() {
+
+        return new AccumulationsSummaryDto(accumulationRepository.getAverageSumInsuredPerStatus(),
+                accumulationRepository.getAccumulationsCreatedPerDate());
+    }
 
     @Override
     public AccumulationDto createAccumulation(AccumulationCreateDto accumulationCreateDto) {
@@ -125,7 +125,7 @@ public class AccumulationServiceImpl implements AccumulationService {
 
         Optional<Accumulation> dbAccumulation = accumulationRepository.findByName(accumulationName);
 
-        if(dbAccumulation.isEmpty()) return "No such class of business";
+        if(dbAccumulation.isEmpty()) throw new IllegalStateException("No accumulation with provided name.");
 
         if (accumulationRepository.deleteByName(accumulationName) == 1) return accumulationName;
 
