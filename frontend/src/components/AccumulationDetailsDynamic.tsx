@@ -33,6 +33,14 @@ export const AccumulationsDetailsDynamic: React.FC = () => {
         setSelectedCoverageIds(ids);
     };
 
+    const handleAccDelete = async (name: string) => {
+        try {
+            await accumulationService.delete(name);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const handleBatchDelete = async () => {
         try {
             await coverageService.delete(selectedCoverageIds);
@@ -130,7 +138,7 @@ export const AccumulationsDetailsDynamic: React.FC = () => {
                                     Edit Accumulation
                                 </Button>
                                 <Button design={"Transparent"}
-                                        onClick={() => navigate(`/accumulations/${id}/edit`)}>
+                                        onClick={() => handleAccDelete(accumulation.name)}>
                                     Delete Accumulation
                                 </Button>
                             </FlexBox>
